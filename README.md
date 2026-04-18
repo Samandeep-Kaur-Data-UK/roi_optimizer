@@ -1,24 +1,54 @@
 # ROI Optimizer: Marketing Mix Model (MMM)
 
 ## Overview
-A Marketing Mix Model built in Python to quantify the sales contribution
-of each marketing channel (TV, digital, radio) and calculate ROI per £1 spent.
-Answers the business question: where should we spend our next £1,000?
+ROI Optimizer is a Marketing Mix Modelling project built in Python to estimate
+how TV, digital, and radio spend contribute to weekly sales. The commercial
+question behind the project is simple: where should the next marketing budget be
+allocated for the strongest return?
 
 ## Tech Stack
-- Python 3.14 / Pandas 3.0
-- Scikit-learn (Linear Regression)
-- Matplotlib / Seaborn
+- Python
+- Pandas
+- Matplotlib
+- Seaborn
+- Scikit-learn
 - Power BI
 
 ## Project Status
-Work in progress - Day 61 of 120-day analytics programme.
+Day 62 complete in a 120-day analytics programme.
+
+Current stage:
+- Marketing dataset generated and quality-checked
+- Exploratory analysis completed
+- Correlation matrix exported
+- Channel vs sales scatter plots created
+- Weekly sales time-series with promo weeks highlighted created
+
+Next stage:
+- Implement adstock transformations for each channel
+- Visualise original vs adstocked spend before modelling
+
+## Day 62 Key Findings
+- `TV` shows the strongest relationship with sales (`r = 0.530`)
+- `Digital` shows a weaker but still meaningful relationship (`r = 0.489`)
+- `Radio` shows almost no relationship with sales (`r = 0.017`)
+- Promo weeks align with visible sales spikes, suggesting `promo_flag` should
+  be retained as a model feature
+
+## Outputs
+- `outputs/correlation_matrix.csv`
+- `outputs/scatter_tv_spend_vs_sales.png`
+- `outputs/scatter_digital_spend_vs_sales.png`
+- `outputs/scatter_radio_spend_vs_sales.png`
+- `outputs/timeseries_sales_promo.png`
 
 ## Structure
-```
+```text
 roi_optimizer/
-├── data/            # Raw and generated datasets
-├── scripts/         # Python analysis scripts
-├── outputs/         # Charts and model outputs
-└── powerbi/         # Dashboard files
+├── data/            # Source dataset and generator script
+├── scripts/         # Inspection and EDA scripts
+├── outputs/         # Charts and correlation outputs
+├── powerbi/         # Dashboard files
+├── README.md
+└── project_notes.md
 ```
