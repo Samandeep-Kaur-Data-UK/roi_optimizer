@@ -17,16 +17,25 @@ allocated for the strongest return?
 ## Project Status
 Day 62 complete in a 120-day analytics programme.
 
-Current stage:
-- Marketing dataset generated and quality-checked
-- Exploratory analysis completed
-- Correlation matrix exported
-- Channel vs sales scatter plots created
-- Weekly sales time-series with promo weeks highlighted created
+Completed so far:
+- Day 61: project setup, synthetic marketing dataset creation, and data quality checks
+- Day 62: exploratory analysis, correlation review, scatter plots, and promo time-series visualisation
 
 Next stage:
 - Implement adstock transformations for each channel
 - Visualise original vs adstocked spend before modelling
+
+## Progress Log
+### Day 61 - Project Setup
+- Created the MMM project structure and generated a 104-row weekly marketing dataset
+- Confirmed the dataset contains no missing values and the data types are correct
+- Established the modelling base with `week`, channel spend, `promo_flag`, and `sales`
+
+### Day 62 - Exploratory Analysis
+- Calculated the correlation matrix for TV, digital, radio, and sales
+- Built three scatter plots to compare channel spend vs sales
+- Built a weekly sales time-series chart with promo weeks highlighted
+- Documented which channels appear most commercially relevant before modelling
 
 ## Day 62 Key Findings
 - `TV` shows the strongest relationship with sales (`r = 0.530`)
