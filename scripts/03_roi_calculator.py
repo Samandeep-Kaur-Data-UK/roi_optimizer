@@ -143,8 +143,6 @@ def save_roi_chart(roi_df: pd.DataFrame) -> None:
     for channel, display_value, color, actual_value in zip(
         roi_df["channel"], display_values, colors, roi_df["return_per_£1"]
     ):
-        hatch = "//" if actual_value < y_min else None
-        alpha = 0.9 if actual_value < y_min else 1.0
         bar = ax.bar(
             channel,
             display_value - y_min,
@@ -153,8 +151,6 @@ def save_roi_chart(roi_df: pd.DataFrame) -> None:
             width=0.62,
             edgecolor="white",
             linewidth=1.0,
-            hatch=hatch,
-            alpha=alpha,
             zorder=3,
         )[0]
         bars.append(bar)
@@ -187,13 +183,16 @@ def save_roi_chart(roi_df: pd.DataFrame) -> None:
         bars, roi_df["return_per_£1"], roi_df["roi"], display_values
     ):
         label = f"£{value:.2f}\nROI {roi_value:+.2%}"
+        label_y = display_value + 0.02
+        if value < y_min:
+            label_y = y_min + 0.013
         ax.text(
             bar.get_x() + bar.get_width() / 2,
-            display_value + 0.02,
+            label_y,
             label,
             ha="center",
             va="bottom",
-            fontsize=9.3,
+            fontsize=9 if value < y_min else 9.3,
             color=TEXT,
         )
 
