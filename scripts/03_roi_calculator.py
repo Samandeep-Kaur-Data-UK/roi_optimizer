@@ -130,16 +130,8 @@ def calculate_roi(df: pd.DataFrame, model: sm.regression.linear_model.Regression
 def save_roi_chart(roi_df: pd.DataFrame) -> None:
     fig, ax = plt.subplots(figsize=(9.2, 5.8))
 
+    x_positions = list(range(len(roi_df)))
     colors = [bar_color(value) for value in roi_df["return_per_£1"]]
-    bars = ax.bar(
-        roi_df["channel"],
-        roi_df["return_per_£1"],
-        color=colors,
-        width=0.62,
-        edgecolor="white",
-        linewidth=1.0,
-        zorder=3,
-    )
 
     add_title_block(
         fig,
@@ -147,7 +139,7 @@ def save_roi_chart(roi_df: pd.DataFrame) -> None:
         "TV is the only channel currently operating above break-even in the model",
     )
 
-    ax.axhline(y=1.0, color=TEXT, linestyle="--", linewidth=1.1, zorder=2)
+    ax.axhline(y=1.0, color=TEXT, linestyle="--", linewidth=1.1, zorder=1)
     ax.text(
         0.99,
         1.01,
@@ -159,16 +151,30 @@ def save_roi_chart(roi_df: pd.DataFrame) -> None:
         color=TEXT,
     )
 
+    for x_position, value, color in zip(x_positions, roi_df["return_per_£1"], colors):
+        ax.vlines(x=x_position, ymin=0.0, ymax=value, color=color, linewidth=4.5, alpha=0.28, zorder=2)
+
+    ax.scatter(
+        x_positions,
+        roi_df["return_per_£1"],
+        s=200,
+        color=colors,
+        edgecolors="white",
+        linewidths=1.2,
+        zorder=4,
+    )
+
     style_axes(ax)
     ax.set_xlabel("Channel")
     ax.set_ylabel("£ sales return per £1 spent")
     ax.yaxis.set_major_formatter(mticker.FuncFormatter(currency_formatter))
-    ax.set_ylim(0, max(1.18, roi_df["return_per_£1"].max() + 0.10))
+    ax.set_xticks(x_positions, roi_df["channel"])
+    ax.set_ylim(0.0, max(1.18, roi_df["return_per_£1"].max() + 0.14))
 
-    for bar, value, roi_value in zip(bars, roi_df["return_per_£1"], roi_df["roi"]):
+    for x_position, value, roi_value in zip(x_positions, roi_df["return_per_£1"], roi_df["roi"]):
         label = f"£{value:.2f}\nROI {roi_value:+.2%}"
         ax.text(
-            bar.get_x() + bar.get_width() / 2,
+            x_position,
             value + 0.025,
             label,
             ha="center",
@@ -183,11 +189,11 @@ def save_roi_chart(roi_df: pd.DataFrame) -> None:
         f"£{top_channel['return_per_£1']:.2f} return per £1 spent"
     )
     ax.text(
-        0.99,
+        0.03,
         0.96,
         summary,
         transform=ax.transAxes,
-        ha="right",
+        ha="left",
         va="top",
         fontsize=9.5,
         color=TEXT,
