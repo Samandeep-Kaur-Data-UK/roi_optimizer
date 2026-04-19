@@ -1,0 +1,47 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  sales   R-squared:                       0.715
+Model:                            OLS   Adj. R-squared:                  0.703
+Method:                 Least Squares   F-statistic:                     62.06
+Date:                Sat, 18 Apr 2026   Prob (F-statistic):           3.83e-26
+Time:                        18:31:00   Log-Likelihood:                -991.24
+No. Observations:                 104   AIC:                             1992.
+Df Residuals:                      99   BIC:                             2006.
+Df Model:                           4                                         
+Covariance Type:            nonrobust                                         
+===================================================================================
+                      coef    std err          t      P>|t|      [0.025      0.975]
+-----------------------------------------------------------------------------------
+const           -5076.8532   2241.193     -2.265      0.026   -9523.866    -629.840
+tv_adstock          0.4281      0.061      6.973      0.000       0.306       0.550
+digital_adstock     0.6875      0.094      7.310      0.000       0.501       0.874
+radio_adstock       0.0724      0.146      0.498      0.620      -0.216       0.361
+promo_flag       8008.4570    817.726      9.794      0.000    6385.912    9631.002
+==============================================================================
+Omnibus:                        0.029   Durbin-Watson:                   1.890
+Prob(Omnibus):                  0.985   Jarque-Bera (JB):                0.091
+Skew:                           0.038   Prob(JB):                        0.956
+Kurtosis:                       2.878   Cond. No.                     2.25e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.25e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+--- Coefficients ---
+const             -5076.853221
+tv_adstock            0.428053
+digital_adstock       0.687478
+radio_adstock         0.072417
+promo_flag         8008.456978
+
+--- P-Values ---
+const              2.567634e-02
+tv_adstock         3.522793e-10
+digital_adstock    6.992432e-11
+radio_adstock      6.199212e-01
+promo_flag         3.085832e-16
+
+R-squared:      0.7149
+Adj R-squared:  0.7034

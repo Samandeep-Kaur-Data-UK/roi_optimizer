@@ -82,3 +82,21 @@ the carry-over zone entirely and produce misleading channel coefficients.
 
 **Next:** Day 64 - Build the linear regression MMM using adstocked channels and
 promo_flag as predictors. Extract coefficients to quantify ROI per pound spent.
+
+
+## Day 64 - OLS Regression MMM Results
+
+R-squared: 0.715
+Adj R-squared: 0.703
+
+| Channel          | Coefficient | P-Value | Significant? |
+|------------------|-------------|---------|--------------|
+| tv_adstock       | 0.4281      | 0.0000  | YES          |
+| digital_adstock  | 0.6875      | 0.0000  | YES          |
+| radio_adstock    | 0.0724      | 0.6199  | NO           |
+| promo_flag       | 8008.46     | 0.0000  | YES          |
+
+Top channel: digital_adstock
+Finding: Digital delivers the highest sales return per £1 spent.
+Finding: Radio is not statistically significant - budget should be reallocated.
+Finding: Promotions add ~8,000 sales units independent of spend.
