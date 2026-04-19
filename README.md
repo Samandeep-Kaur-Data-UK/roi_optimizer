@@ -18,7 +18,7 @@ be allocated for the strongest return?
 
 ## Project Status
 
-Day 64 complete in a 120-day analytics programme.
+Day 65 complete in a 120-day analytics programme.
 
 ## Progress Log
 
@@ -52,6 +52,15 @@ Day 64 complete in a 120-day analytics programme.
 - Identified radio as statistically insignificant (p = 0.62)
 - Saved full model summary to `outputs/mmm_model_summary.txt`
 
+### Day 65 - ROI Calculation per Channel
+
+- Converted OLS coefficients into ROI per £1 of effective spend per channel
+- TV is the top performing channel at £1.06 return per £1 spent (ROI +5.59%)
+- Digital operates just below break-even at £0.98 return per £1 spent (ROI -2.20%)
+- Radio destroys value at £0.12 return per £1 spent (ROI -87.97%)
+- Key insight: digital has a higher coefficient than TV but lower ROI because its adstock carry-over is weaker at decay rate 0.3 vs TV's 0.6 - raw coefficients alone do not tell the full story
+- Saved ROI table to `outputs/roi_by_channel.csv` and bar chart to `outputs/roi_by_channel.png`
+
 ## Key Findings
 
 ### Correlation vs Sales (Pre-Model)
@@ -73,16 +82,20 @@ Day 64 complete in a 120-day analytics programme.
 
 **Model R-squared: 0.715**
 
-- Digital is the most efficient channel: every £1 of adstocked spend returns 0.69 units of sales
-- TV is the second strongest: every £1 of adstocked spend returns 0.43 units of sales
-- Radio shows no statistically significant return and should not receive increased budget
-- Promotions add approximately 8,000 sales units per activation, independent of channel spend
+### ROI per Channel (Day 65)
+
+| Channel | Coefficient | Avg Weekly Spend | Avg Adstock | Return per £1 | ROI |
+|---------|-------------|-----------------|-------------|---------------|-----|
+| TV | 0.4281 | £11,996.47 | £29,592.65 | £1.06 | +5.59% |
+| Digital | 0.6875 | £8,937.62 | £12,714.81 | £0.98 | -2.20% |
+| Radio | 0.0724 | £4,666.85 | £7,750.90 | £0.12 | -87.97% |
+
+**Business Recommendation:** Reallocate radio budget to TV immediately. Review digital spend levels as current allocation is operating just below break-even.
 
 ## Next Stage
 
-- Convert coefficients into cost-per-sale by channel
-- Build a £1,000 budget allocation recommendation tool
-- Visualise ROI comparison across channels in Power BI
+- Build £1,000 budget allocation optimiser weighted by channel ROI
+- Visualise ROI comparison and budget allocation in Power BI
 
 ## Outputs
 
@@ -96,12 +109,14 @@ Day 64 complete in a 120-day analytics programme.
 | `outputs/tv_adstock_plot.png` | TV original vs adstocked spend |
 | `data/mmm_data_adstocked.csv` | Dataset with adstock columns added |
 | `outputs/mmm_model_summary.txt` | Full OLS regression results |
+| `outputs/roi_by_channel.csv` | ROI per channel table |
+| `outputs/roi_by_channel.png` | ROI bar chart by channel |
 
 ## Structure
 
     roi_optimizer/
     ├── data/               # Source dataset, generator script, adstocked dataset
-    ├── scripts/            # Inspection, EDA, adstock, and regression scripts
+    ├── scripts/            # Inspection, EDA, adstock, regression, and ROI scripts
     ├── outputs/            # Charts and model outputs
     ├── powerbi/            # Dashboard files
     ├── README.md
