@@ -12,12 +12,13 @@ be allocated for the strongest return?
 - Python 3.14
 - Pandas
 - Matplotlib
+- Statsmodels
 - Scikit-learn
 - Power BI
 
 ## Project Status
 
-Day 63 complete in a 120-day analytics programme.
+Day 64 complete in a 120-day analytics programme.
 
 ## Progress Log
 
@@ -41,7 +42,19 @@ Day 63 complete in a 120-day analytics programme.
 - Visualised original vs adstocked TV spend across 104 weeks
 - Exported adstocked dataset ready for regression modelling
 
-## Key Findings So Far
+### Day 64 - OLS Regression Model
+
+- Built an OLS (Ordinary Least Squares) regression using statsmodels
+- Inputs: tv_adstock, digital_adstock, radio_adstock, promo_flag
+- Output: weekly sales
+- Model achieved R-squared of 0.715 - explaining 71.5% of all sales variation
+- Extracted channel coefficients to quantify sales return per £1 of adstocked spend
+- Identified radio as statistically insignificant (p = 0.62)
+- Saved full model summary to `outputs/mmm_model_summary.txt`
+
+## Key Findings
+
+### Correlation vs Sales (Pre-Model)
 
 | Channel | Correlation with Sales | Adstock Decay | Avg Carry-Over Uplift |
 |---------|------------------------|---------------|-----------------------|
@@ -49,16 +62,27 @@ Day 63 complete in a 120-day analytics programme.
 | Digital | r = 0.489 | 0.3 | +43% |
 | Radio | r = 0.017 | 0.4 | +67% |
 
-- TV shows the strongest raw relationship with sales and the longest ad memory
-- Digital shows a weaker but meaningful relationship with fast decay
-- Radio shows almost no correlation with sales (r = 0.017)
-- Promo weeks align with visible sales spikes, `promo_flag` retained as model feature
-- Without adstock, a regression using raw spend would underestimate TV's true contribution
+### OLS Regression Results (Day 64)
+
+| Channel | Coefficient | P-Value | Significant? |
+|---------|-------------|---------|--------------|
+| digital_adstock | 0.6875 | 0.0000 | YES |
+| tv_adstock | 0.4281 | 0.0000 | YES |
+| radio_adstock | 0.0724 | 0.6199 | NO |
+| promo_flag | 8008.46 | 0.0000 | YES |
+
+**Model R-squared: 0.715**
+
+- Digital is the most efficient channel: every £1 of adstocked spend returns 0.69 units of sales
+- TV is the second strongest: every £1 of adstocked spend returns 0.43 units of sales
+- Radio shows no statistically significant return and should not receive increased budget
+- Promotions add approximately 8,000 sales units per activation, independent of channel spend
 
 ## Next Stage
 
-- Build linear regression MMM using adstocked channels and `promo_flag`
-- Extract channel coefficients to quantify ROI per pound spent
+- Convert coefficients into cost-per-sale by channel
+- Build a £1,000 budget allocation recommendation tool
+- Visualise ROI comparison across channels in Power BI
 
 ## Outputs
 
@@ -71,12 +95,13 @@ Day 63 complete in a 120-day analytics programme.
 | `outputs/timeseries_sales_promo.png` | Weekly sales with promo highlights |
 | `outputs/tv_adstock_plot.png` | TV original vs adstocked spend |
 | `data/mmm_data_adstocked.csv` | Dataset with adstock columns added |
+| `outputs/mmm_model_summary.txt` | Full OLS regression results |
 
 ## Structure
 
     roi_optimizer/
     ├── data/               # Source dataset, generator script, adstocked dataset
-    ├── scripts/            # Inspection, EDA, and adstock scripts
+    ├── scripts/            # Inspection, EDA, adstock, and regression scripts
     ├── outputs/            # Charts and model outputs
     ├── powerbi/            # Dashboard files
     ├── README.md
