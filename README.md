@@ -18,7 +18,7 @@ be allocated for the strongest return?
 
 ## Project Status
 
-Day 65 complete in a 120-day analytics programme.
+Day 66 complete in a 120-day analytics programme.
 
 ## Progress Log
 
@@ -61,6 +61,17 @@ Day 65 complete in a 120-day analytics programme.
 - Key insight: digital has a higher coefficient than TV but lower ROI because its adstock carry-over is weaker at decay rate 0.3 vs TV's 0.6 - raw coefficients alone do not tell the full story
 - Saved ROI table to `outputs/roi_by_channel.csv` and bar chart to `outputs/roi_by_channel.png`
 
+### Day 66 - Budget Optimiser
+
+- Built a CLI budget optimisation tool using `argparse` - accepts any budget as input
+- Logic: only channels above break-even (return per £1 > 1.0) receive allocation
+- Budget is weighted proportionally by ROI score across profitable channels
+- At current ROI levels, 100% of budget allocated to TV as the only profitable channel
+- £1,000 input returns £1,055.90 in expected sales (net gain of £55.90)
+- £50,000 input returns £52,795.00 in expected sales
+- Digital and Radio receive £0 allocation until spend efficiency improves
+- Saved allocation table to `outputs/budget_allocation.csv` and chart to `outputs/budget_allocation.png`
+
 ## Key Findings
 
 ### Correlation vs Sales (Pre-Model)
@@ -90,12 +101,21 @@ Day 65 complete in a 120-day analytics programme.
 | Digital | 0.6875 | £8,937.62 | £12,714.81 | £0.98 | -2.20% |
 | Radio | 0.0724 | £4,666.85 | £7,750.90 | £0.12 | -87.97% |
 
-**Business Recommendation:** Reallocate radio budget to TV immediately. Review digital spend levels as current allocation is operating just below break-even.
+### Budget Allocation (Day 66)
+
+| Channel | Return per £1 | £1,000 Allocation | Expected Sales |
+|---------|--------------|-------------------|----------------|
+| TV | £1.06 | £1,000.00 | £1,055.90 |
+| Digital | £0.98 | £0.00 | £0.00 |
+| Radio | £0.12 | £0.00 | £0.00 |
+
+**Business Recommendation:** At current ROI levels, allocate 100% of marketing
+budget to TV. Revisit digital spend efficiency before increasing its allocation.
+Eliminate radio spend entirely.
 
 ## Next Stage
 
-- Build £1,000 budget allocation optimiser weighted by channel ROI
-- Visualise ROI comparison and budget allocation in Power BI
+- Day 67: Power BI dashboard - KPIs, ROI comparison, budget allocation, sales trend
 
 ## Outputs
 
@@ -111,12 +131,14 @@ Day 65 complete in a 120-day analytics programme.
 | `outputs/mmm_model_summary.txt` | Full OLS regression results |
 | `outputs/roi_by_channel.csv` | ROI per channel table |
 | `outputs/roi_by_channel.png` | ROI bar chart by channel |
+| `outputs/budget_allocation.csv` | Recommended budget allocation table |
+| `outputs/budget_allocation.png` | Budget allocation and expected sales chart |
 
 ## Structure
 
     roi_optimizer/
     ├── data/               # Source dataset, generator script, adstocked dataset
-    ├── scripts/            # Inspection, EDA, adstock, regression, and ROI scripts
+    ├── scripts/            # Inspection, EDA, adstock, regression, ROI, and optimiser scripts
     ├── outputs/            # Charts and model outputs
     ├── powerbi/            # Dashboard files
     ├── README.md
