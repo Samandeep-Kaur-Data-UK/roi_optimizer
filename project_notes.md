@@ -163,3 +163,86 @@ returns £1,055.90 in sales - a £55.90 net gain. Digital and Radio would destro
 value at current spend efficiency levels.
 
 **Next:** Day 67 - Power BI MMM Results Dashboard.
+
+## Day 67 - Power BI MMM Results Dashboard
+
+**Tool:** Power BI Desktop (Windows 365)
+**Outputs:** `powerbi/mmm_dashboard.pbix`, `outputs/day67_powerbi_demo_dashboard.png`
+
+### Dashboard Structure
+
+| Page | Visual | Description |
+|------|--------|-------------|
+| Page 1: KPIs | 4 Card visuals + Line chart + Bar chart + 2 Slicers | Top level performance summary |
+| Page 2: Channel ROI | Clustered bar chart | Return per £1 by channel |
+| Page 3: Budget Allocation | Pie chart + Table | Optimised spend recommendation |
+| Page 4: Sales vs Spend | Dual-axis line chart | Sales trend overlaid with total spend |
+
+### KPI Card Values (verified)
+
+| Measure | Value |
+|---------|-------|
+| Total Sales | £1,941,048 |
+| Total Spend | £2,662,497 |
+| Promo Weeks | 23 |
+| ROAS | 0.73 |
+
+### DAX Measures Created
+
+| Measure | Formula |
+|---------|---------|
+| Total Sales | SUM(marketing_data_powerbi[sales]) |
+| TV Spend | SUM(marketing_data_powerbi[tv_spend]) |
+| Digital Spend | SUM(marketing_data_powerbi[digital_spend]) |
+| Radio Spend | SUM(marketing_data_powerbi[radio_spend]) |
+| Total Spend | TV Spend + Digital Spend + Radio Spend |
+| ROAS | DIVIDE(Total Sales, Total Spend) |
+| Avg Weekly Sales | AVERAGE(marketing_data_powerbi[sales]) |
+| Total Weeks | DISTINCTCOUNT(marketing_data_powerbi[week]) |
+| Promo Weeks | SUM(marketing_data_powerbi[promo_flag]) |
+| Promo Week % | DIVIDE(Promo Weeks, Total Weeks) |
+| Sales In Promo Weeks | CALCULATE(Total Sales, promo_flag = 1) |
+| Sales In Non Promo Weeks | CALCULATE(Total Sales, promo_flag = 0) |
+| Rolling 4W Sales | CALCULATE(Total Sales, DATESINPERIOD(Date, MAX(Date), -28, DAY)) |
+
+### Colour Schema
+
+| Card | Background | Value | Label |
+|------|-----------|-------|-------|
+| Total Sales | #EEEDFE | #3C3489 | #534AB7 |
+| Total Spend | #FAECE7 | #712B13 | #993C1D |
+| Promo Weeks | #E1F5EE | #085041 | #0F6E56 |
+| ROAS | #E6F1FB | #0C447C | #185FA5 |
+
+**Status:** Page 1 KPI cards complete and verified. Line chart complete.
+Bar chart and slicers in progress - to be completed Day 69 morning.
+
+**Next:** Day 68 - Scenario analysis, then return to complete Pages 2, 3, 4.
+
+
+## Day 68 - Sensitivity Analysis: What If Scenarios
+
+**Script:** `scripts/05_scenario_analysis.py`
+**Output:** `outputs/scenario_comparison.csv`
+
+### Scenario Results
+
+| Scenario | Predicted Sales | vs Baseline | Impact % |
+|----------|----------------|-------------|----------|
+| Baseline | £1,941,047 | £0 | 0.00% |
+| A: Digital +20% / TV -20% | £1,859,385 | -£81,662 | -4.21% |
+| B: Radio x2 / Digital -50% | £1,544,882 | -£396,165 | -20.41% |
+| C: Remove TV / Digital +20% | £805,472 | -£1,135,575 | -58.50% |
+
+### Key Findings
+
+- No reallocation scenario improves on baseline sales
+- Scenario C is catastrophic (-58.5%) confirming TV is the primary sales driver
+- Scenario B confirms radio's weak coefficient (0.072) - doubling it cannot offset halving digital
+- Scenario A is the least damaging reallocation but still loses £81K
+- Business insight: the current channel mix is near-optimal - incremental total budget increase is a stronger lever than reallocation
+
+**Status:** Complete. CSV exported and committed to GitHub.
+Pending: Load scenario_comparison.csv into Power BI (to be done Day 69 morning).
+
+**Next:** Day 69 - Complete Power BI dashboard Pages 2, 3, 4 and full pipeline test.
