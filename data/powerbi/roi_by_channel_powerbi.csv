@@ -1,0 +1,4 @@
+channel,coefficient,avg_weekly_spend,avg_adstock,incremental_sales,roi,return_per_gbp1
+TV,0.4281,11996.47,29592.65,12667.23,0.0559,1.0559
+Digital,0.6875,8937.62,12714.81,8741.15,-0.022,0.978
+Radio,0.0724,4666.85,7750.9,561.3,-0.8797,0.1203

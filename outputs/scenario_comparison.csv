@@ -1,0 +1,5 @@
+Scenario,Predicted Sales (£),vs Baseline (£),Impact %
+Baseline,1941047.34,0.0,0.0
+A: Digital +20% / TV -20%,1859385.04,-81662.3,-4.21
+B: Radio x2 / Digital -50%,1544882.46,-396164.88,-20.41
+C: Remove TV / Digital +20%,805472.19,-1135575.15,-58.5
