@@ -18,7 +18,7 @@ be allocated for the strongest return?
 
 ## Project Status
 
-Day 66 complete in a 120-day analytics programme.
+Day 68 complete in a 120-day analytics programme.
 
 ## Progress Log
 
@@ -72,6 +72,20 @@ Day 66 complete in a 120-day analytics programme.
 - Digital and Radio receive £0 allocation until spend efficiency improves
 - Saved allocation table to `outputs/budget_allocation.csv` and chart to `outputs/budget_allocation.png`
 
+### Day 67 - Power BI MMM Results Dashboard
+
+- In progress - dashboard build continuing Day 69
+
+### Day 68 - Sensitivity Analysis: What If Scenarios
+
+- Built scenario analysis script to model 3 budget reallocation strategies
+- Used OLS coefficients to predict sales impact of each scenario
+- Scenario A (Digital +20% / TV -20%): sales drop -4.21% (-£81,662)
+- Scenario B (Radio x2 / Digital -50%): sales drop -20.41% (-£396,165)
+- Scenario C (Remove TV / Digital +20%): sales drop -58.50% (-£1,135,575)
+- Key insight: no reallocation improves baseline - current mix is near-optimal
+- Saved results to `outputs/scenario_comparison.csv`
+
 ## Key Findings
 
 ### Correlation vs Sales (Pre-Model)
@@ -113,9 +127,23 @@ Day 66 complete in a 120-day analytics programme.
 budget to TV. Revisit digital spend efficiency before increasing its allocation.
 Eliminate radio spend entirely.
 
+### Scenario Analysis (Day 68)
+
+| Scenario | Predicted Sales | vs Baseline | Impact % |
+|----------|----------------|-------------|----------|
+| Baseline | £1,941,047 | £0 | 0.00% |
+| A: Digital +20% / TV -20% | £1,859,385 | -£81,662 | -4.21% |
+| B: Radio x2 / Digital -50% | £1,544,882 | -£396,165 | -20.41% |
+| C: Remove TV / Digital +20% | £805,472 | -£1,135,575 | -58.50% |
+
+**Business Insight:** No reallocation scenario improves on baseline sales.
+The current channel mix is near-optimal. Increasing total budget is a stronger
+lever than reallocating between channels.
+
 ## Next Stage
 
-- Day 67: Power BI dashboard - KPIs, ROI comparison, budget allocation, sales trend
+- Day 69: Complete Power BI dashboard Pages 2, 3, 4 and full pipeline test
+- Load scenario_comparison.csv into Power BI for what-if visualisation
 
 ## Outputs
 
@@ -133,6 +161,7 @@ Eliminate radio spend entirely.
 | `outputs/roi_by_channel.png` | ROI bar chart by channel |
 | `outputs/budget_allocation.csv` | Recommended budget allocation table |
 | `outputs/budget_allocation.png` | Budget allocation and expected sales chart |
+| `outputs/scenario_comparison.csv` | 3 scenario budget reallocation results vs baseline |
 
 ## Structure
 
