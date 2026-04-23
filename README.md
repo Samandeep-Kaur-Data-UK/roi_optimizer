@@ -18,7 +18,7 @@ be allocated for the strongest return?
 
 ## Project Status
 
-Day 68 complete in a 120-day analytics programme.
+Day 70 complete in a 120-day analytics programme.
 
 ## Progress Log
 
@@ -58,7 +58,9 @@ Day 68 complete in a 120-day analytics programme.
 - TV is the top performing channel at £1.06 return per £1 spent (ROI +5.59%)
 - Digital operates just below break-even at £0.98 return per £1 spent (ROI -2.20%)
 - Radio destroys value at £0.12 return per £1 spent (ROI -87.97%)
-- Key insight: digital has a higher coefficient than TV but lower ROI because its adstock carry-over is weaker at decay rate 0.3 vs TV's 0.6 - raw coefficients alone do not tell the full story
+- Key insight: digital has a higher coefficient than TV but lower ROI because its
+  adstock carry-over is weaker at decay rate 0.3 vs TV's 0.6 - raw coefficients
+  alone do not tell the full story
 - Saved ROI table to `outputs/roi_by_channel.csv` and bar chart to `outputs/roi_by_channel.png`
 
 ### Day 66 - Budget Optimiser
@@ -68,15 +70,16 @@ Day 68 complete in a 120-day analytics programme.
 - Budget is weighted proportionally by ROI score across profitable channels
 - At current ROI levels, 100% of budget allocated to TV as the only profitable channel
 - £1,000 input returns £1,055.90 in expected sales (net gain of £55.90)
-- £50,000 input returns £52,795.00 in expected sales
 - Digital and Radio receive £0 allocation until spend efficiency improves
 - Saved allocation table to `outputs/budget_allocation.csv` and chart to `outputs/budget_allocation.png`
 
-### Day 67 - Power BI MMM Results Dashboard
+### Day 67 - Power BI MMM Results Dashboard (In Progress)
 
-- In progress - dashboard build continuing Day 69
+- Dashboard build started - KPI page complete with Total Sales, Total Spend, ROAS, Promo Weeks
+- Weekly Sales Trend line chart and Spend by Channel bar chart live on Page 1
+- Pages 2, 3, and 4 in progress - continuing Day 69
 
-### Day 68 - Sensitivity Analysis: What If Scenarios
+### Day 68 - Scenario Analysis
 
 - Built scenario analysis script to model 3 budget reallocation strategies
 - Used OLS coefficients to predict sales impact of each scenario
@@ -86,42 +89,55 @@ Day 68 complete in a 120-day analytics programme.
 - Key insight: no reallocation improves baseline - current mix is near-optimal
 - Saved results to `outputs/scenario_comparison.csv`
 
+### Day 69 - Power BI Dashboard Continued (In Progress)
+
+- Channel ROI Bar Chart page in progress using real model outputs from roi_by_channel_powerbi.csv
+- Budget Allocation and Scenario pages to follow
+- HTML interactive dashboard built as parallel portfolio deliverable
+
+### Day 70 - Presentation Preparation
+
+- Written verbal walkthrough of the full MMM project in `presentation_notes.md`
+- Framed as a business story: problem, method, findings, and recommendation
+- Prepared interview answers covering model validation, OLS limitations, and improvement paths
+- Key framing: lead with incremental revenue outcomes, not model metrics
+
 ## Key Findings
 
 ### Correlation vs Sales (Pre-Model)
 
 | Channel | Correlation with Sales | Adstock Decay | Avg Carry-Over Uplift |
 |---------|------------------------|---------------|-----------------------|
-| TV | r = 0.530 | 0.6 | +147% |
-| Digital | r = 0.489 | 0.3 | +43% |
-| Radio | r = 0.017 | 0.4 | +67% |
+| TV      | r = 0.530              | 0.6           | +147%                 |
+| Digital | r = 0.489              | 0.3           | +43%                  |
+| Radio   | r = 0.017              | 0.4           | +67%                  |
 
 ### OLS Regression Results (Day 64)
 
-| Channel | Coefficient | P-Value | Significant? |
-|---------|-------------|---------|--------------|
-| digital_adstock | 0.6875 | 0.0000 | YES |
-| tv_adstock | 0.4281 | 0.0000 | YES |
-| radio_adstock | 0.0724 | 0.6199 | NO |
-| promo_flag | 8008.46 | 0.0000 | YES |
+| Channel          | Coefficient | P-Value | Significant? |
+|------------------|-------------|---------|--------------|
+| digital_adstock  | 0.6875      | 0.0000  | YES          |
+| tv_adstock       | 0.4281      | 0.0000  | YES          |
+| radio_adstock    | 0.0724      | 0.6199  | NO           |
+| promo_flag       | 8008.46     | 0.0000  | YES          |
 
 **Model R-squared: 0.715**
 
 ### ROI per Channel (Day 65)
 
-| Channel | Coefficient | Avg Weekly Spend | Avg Adstock | Return per £1 | ROI |
-|---------|-------------|-----------------|-------------|---------------|-----|
-| TV | 0.4281 | £11,996.47 | £29,592.65 | £1.06 | +5.59% |
-| Digital | 0.6875 | £8,937.62 | £12,714.81 | £0.98 | -2.20% |
-| Radio | 0.0724 | £4,666.85 | £7,750.90 | £0.12 | -87.97% |
+| Channel | Coefficient | Avg Weekly Spend | Avg Adstock  | Return per £1 | ROI      |
+|---------|-------------|-----------------|--------------|---------------|----------|
+| TV      | 0.4281      | £11,996.47      | £29,592.65   | £1.06         | +5.59%   |
+| Digital | 0.6875      | £8,937.62       | £12,714.81   | £0.98         | -2.20%   |
+| Radio   | 0.0724      | £4,666.85       | £7,750.90    | £0.12         | -87.97%  |
 
 ### Budget Allocation (Day 66)
 
 | Channel | Return per £1 | £1,000 Allocation | Expected Sales |
 |---------|--------------|-------------------|----------------|
-| TV | £1.06 | £1,000.00 | £1,055.90 |
-| Digital | £0.98 | £0.00 | £0.00 |
-| Radio | £0.12 | £0.00 | £0.00 |
+| TV      | £1.06        | £1,000.00         | £1,055.90      |
+| Digital | £0.98        | £0.00             | £0.00          |
+| Radio   | £0.12        | £0.00             | £0.00          |
 
 **Business Recommendation:** At current ROI levels, allocate 100% of marketing
 budget to TV. Revisit digital spend efficiency before increasing its allocation.
@@ -129,21 +145,16 @@ Eliminate radio spend entirely.
 
 ### Scenario Analysis (Day 68)
 
-| Scenario | Predicted Sales | vs Baseline | Impact % |
-|----------|----------------|-------------|----------|
-| Baseline | £1,941,047 | £0 | 0.00% |
-| A: Digital +20% / TV -20% | £1,859,385 | -£81,662 | -4.21% |
-| B: Radio x2 / Digital -50% | £1,544,882 | -£396,165 | -20.41% |
-| C: Remove TV / Digital +20% | £805,472 | -£1,135,575 | -58.50% |
+| Scenario                    | Predicted Sales | vs Baseline  | Impact %  |
+|-----------------------------|----------------|--------------|-----------|
+| Baseline                    | £1,941,047     | £0           | 0.00%     |
+| A: Digital +20% / TV -20%   | £1,859,385     | -£81,662     | -4.21%    |
+| B: Radio x2 / Digital -50%  | £1,544,882     | -£396,165    | -20.41%   |
+| C: Remove TV / Digital +20% | £805,472       | -£1,135,575  | -58.50%   |
 
 **Business Insight:** No reallocation scenario improves on baseline sales.
 The current channel mix is near-optimal. Increasing total budget is a stronger
 lever than reallocating between channels.
-
-## Next Stage
-
-- Day 69: Complete Power BI dashboard Pages 2, 3, 4 and full pipeline test
-- Load scenario_comparison.csv into Power BI for what-if visualisation
 
 ## Outputs
 
@@ -162,13 +173,14 @@ lever than reallocating between channels.
 | `outputs/budget_allocation.csv` | Recommended budget allocation table |
 | `outputs/budget_allocation.png` | Budget allocation and expected sales chart |
 | `outputs/scenario_comparison.csv` | 3 scenario budget reallocation results vs baseline |
+| `presentation_notes.md` | Business story walkthrough and interview Q&A |
 
 ## Structure
 
     roi_optimizer/
     ├── data/               # Source dataset, generator script, adstocked dataset
-    ├── scripts/            # Inspection, EDA, adstock, regression, ROI, and optimiser scripts
+    ├── scripts/            # Inspection, EDA, adstock, regression, ROI, optimiser, scenario scripts
     ├── outputs/            # Charts and model outputs
     ├── powerbi/            # Dashboard files
     ├── README.md
-    └── project_notes.md
+    └── presentation_notes.md
