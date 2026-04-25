@@ -20,6 +20,20 @@ be allocated for the strongest return?
 
 Day 69 complete in a 120-day analytics programme.
 
+## Dashboard Preview
+
+### Page 1: Executive Overview
+![Executive Overview](powerbi/day67_executive_overview.png)
+
+### Page 2: Channel Return on Investment Comparison
+![Channel ROI Comparison](powerbi/day67_channel_roi_comparison.png)
+
+### Page 3: Optimised Budget Allocation
+![Optimised Budget Allocation](powerbi/day67_optimised_budget_allocation.png)
+
+### Page 4: Scenario Analysis Matrix
+![Scenario Analysis Matrix](powerbi/day69_scenario_analysis_matrix.png)
+
 ## Progress Log
 
 ### Day 61 - Project Setup
