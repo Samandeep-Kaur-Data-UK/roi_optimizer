@@ -32,7 +32,7 @@ with promo highlights.
 `outputs/scatter_digital_spend_vs_sales.png`,
 `outputs/scatter_radio_spend_vs_sales.png`,
 `outputs/timeseries_sales_promo.png`,
-`outputs/correlation_matrix.csv`
+`data/correlation_matrix.csv`
 
 | Channel | Correlation with Sales | Verdict |
 |---------|------------------------|---------|
@@ -107,7 +107,7 @@ Adj R-squared: 0.703
 ## Day 65 - ROI Calculation per Channel
 
 **Script:** `scripts/03_roi_calculator.py`
-**Outputs:** `outputs/roi_by_channel.csv`, `outputs/roi_by_channel.png`
+**Outputs:** `data/roi_by_channel.csv`, `outputs/roi_by_channel.png`
 
 | Channel | Coefficient | Avg Weekly Spend | Avg Adstock | Return per £1 | ROI |
 |---------|-------------|-----------------|-------------|---------------|-----|

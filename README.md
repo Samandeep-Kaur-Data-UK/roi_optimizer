@@ -61,7 +61,7 @@ Day 69 complete in a 120-day analytics programme.
 - Key insight: digital has a higher coefficient than TV but lower ROI because its
   adstock carry-over is weaker at decay rate 0.3 vs TV's 0.6 - raw coefficients
   alone do not tell the full story
-- Saved ROI table to `outputs/roi_by_channel.csv` and bar chart to `outputs/roi_by_channel.png`
+- Saved ROI table to `data/roi_by_channel.csv` and bar chart to `outputs/roi_by_channel.png`
 
 ### Day 66 - Budget Optimiser
 
@@ -170,7 +170,7 @@ lever than reallocating between channels.
 
 | File | Description |
 |------|-------------|
-| `outputs/correlation_matrix.csv` | Pearson r values across all channels |
+| `data/correlation_matrix.csv` | Pearson r values across all channels |
 | `outputs/scatter_tv_spend_vs_sales.png` | TV spend vs sales scatter |
 | `outputs/scatter_digital_spend_vs_sales.png` | Digital spend vs sales scatter |
 | `outputs/scatter_radio_spend_vs_sales.png` | Radio spend vs sales scatter |
@@ -178,7 +178,7 @@ lever than reallocating between channels.
 | `outputs/tv_adstock_plot.png` | TV original vs adstocked spend |
 | `data/mmm_data_adstocked.csv` | Dataset with adstock columns added |
 | `outputs/mmm_model_summary.txt` | Full OLS regression results |
-| `outputs/roi_by_channel.csv` | ROI per channel table |
+| `data/roi_by_channel.csv` | ROI per channel table |
 | `outputs/roi_by_channel.png` | ROI bar chart by channel |
 | `outputs/budget_allocation.csv` | Recommended budget allocation table |
 | `outputs/budget_allocation.png` | Budget allocation and expected sales chart |
