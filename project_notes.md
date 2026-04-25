@@ -164,85 +164,107 @@ value at current spend efficiency levels.
 
 **Next:** Day 67 - Power BI MMM Results Dashboard.
 
-## Day 67 - Power BI MMM Results Dashboard
 
-**Tool:** Power BI Desktop (Windows 365)
-**Outputs:** `powerbi/mmm_dashboard.pbix`, `outputs/day67_powerbi_demo_dashboard.png`
+## Day 67 - Power BI Dashboard: Executive Overview + Channel ROI
 
-### Dashboard Structure
+**Tool:** Power BI Desktop (Windows 365 via RDP on Mac)
+**Outputs:** `powerbi/day67_executive_overview.png`, `powerbi/day67_channel_roi_comparison.png`, `powerbi/day67_optimised_budget_allocation.png`
 
-| Page | Visual | Description |
-|------|--------|-------------|
-| Page 1: KPIs | 4 Card visuals + Line chart + Bar chart + 2 Slicers | Top level performance summary |
-| Page 2: Channel ROI | Clustered bar chart | Return per £1 by channel |
-| Page 3: Budget Allocation | Pie chart + Table | Optimised spend recommendation |
-| Page 4: Sales vs Spend | Dual-axis line chart | Sales trend overlaid with total spend |
+### Dashboard Pages Built
+
+| Page | Title | Visuals |
+|------|-------|---------|
+| 1 | Executive Overview | 4 KPI cards, weekly revenue trend line chart, monthly spend by channel bar chart |
+| 2 | Channel Return on Investment Comparison | Horizontal bar chart with data labels, Readout narrative card |
+| 3 | Optimised Budget Allocation | Donut chart, spend matrix table, interpretation box |
 
 ### KPI Card Values (verified)
 
 | Measure | Value |
 |---------|-------|
-| Total Sales | £1,941,048 |
-| Total Spend | £2,662,497 |
-| Promo Weeks | 23 |
+| Total Revenue | £1.94M |
+| Total Spend | £2.7M |
 | ROAS | 0.73 |
+| Weeks on Promotion | 23 |
 
 ### DAX Measures Created
 
 | Measure | Formula |
 |---------|---------|
-| Total Sales | SUM(marketing_data_powerbi[sales]) |
+| Total Revenue | SUM(marketing_data_powerbi[sales]) |
 | TV Spend | SUM(marketing_data_powerbi[tv_spend]) |
 | Digital Spend | SUM(marketing_data_powerbi[digital_spend]) |
 | Radio Spend | SUM(marketing_data_powerbi[radio_spend]) |
 | Total Spend | TV Spend + Digital Spend + Radio Spend |
-| ROAS | DIVIDE(Total Sales, Total Spend) |
-| Avg Weekly Sales | AVERAGE(marketing_data_powerbi[sales]) |
-| Total Weeks | DISTINCTCOUNT(marketing_data_powerbi[week]) |
+| ROAS | DIVIDE(Total Revenue, Total Spend) |
 | Promo Weeks | SUM(marketing_data_powerbi[promo_flag]) |
-| Promo Week % | DIVIDE(Promo Weeks, Total Weeks) |
-| Sales In Promo Weeks | CALCULATE(Total Sales, promo_flag = 1) |
-| Sales In Non Promo Weeks | CALCULATE(Total Sales, promo_flag = 0) |
-| Rolling 4W Sales | CALCULATE(Total Sales, DATESINPERIOD(Date, MAX(Date), -28, DAY)) |
 
-### Colour Schema
+### Channel ROI Results (Page 2)
 
-| Card | Background | Value | Label |
-|------|-----------|-------|-------|
-| Total Sales | #EEEDFE | #3C3489 | #534AB7 |
-| Total Spend | #FAECE7 | #712B13 | #993C1D |
-| Promo Weeks | #E1F5EE | #085041 | #0F6E56 |
-| ROAS | #E6F1FB | #0C447C | #185FA5 |
+| Channel | ROI | Status |
+|---------|-----|--------|
+| TV | +5.59% | Top performer |
+| Digital | -2.20% | Near break-even |
+| Radio | -87.97% | Value destructive |
 
-**Status:** Page 1 KPI cards complete and verified. Line chart complete.
-Bar chart and slicers in progress - to be completed Day 69 morning.
+### Budget Allocation Results (Page 3)
 
-**Next:** Day 68 - Scenario analysis, then return to complete Pages 2, 3, 4.
+| Channel | Recommended Spend | Weight | Expected Sales |
+|---------|------------------|--------|----------------|
+| TV | £50,000 | 100% | £52,795 |
+| Digital | £0 | 0% | £0 |
+| Radio | £0 | 0% | £0 |
+
+### Colour Theme
+
+| Page | Primary Colour |
+|------|---------------|
+| Executive Overview | Blue (#4472C4) |
+| Channel ROI | Dark charcoal Readout card, bar colours by performance |
+| Budget Allocation | Blue theme, pink Interpretation box |
+| Scenario Analysis | Dark charcoal Summary card, conditional pink/blue highlighting |
+
+**Polish applied:**
+- KPI cards equalised to Height 223, Width 277
+- Monthly bar chart sorted Jan to Dec using Month No sort column
+- Legend labels renamed from raw column names to TV Spend, Radio Spend, Digital Spend
+- Chart titles cleaned and consistent
+- X-axis label added to Channel ROI chart: Channel ROI
+- Data labels added to ROI bars showing percentage values
+
+**Next:** Day 69 - Scenario Analysis Matrix page and final dashboard polish.
 
 
-## Day 68 - Sensitivity Analysis: What If Scenarios
+## Day 69 - Power BI Dashboard: Scenario Analysis + Final Polish
 
-**Script:** `scripts/05_scenario_analysis.py`
-**Output:** `outputs/scenario_comparison.csv`
+**Tool:** Power BI Desktop (Windows 365 via RDP on Mac)
+**Outputs:** `powerbi/day69_scenario_analysis_matrix.png`, `powerbi/Project3_MMM_Dashboard_Final.pbix`
 
-### Scenario Results
+### Scenario Analysis Matrix (Page 4)
 
 | Scenario | Predicted Sales | vs Baseline | Impact % |
 |----------|----------------|-------------|----------|
-| Baseline | £1,941,047 | £0 | 0.00% |
-| A: Digital +20% / TV -20% | £1,859,385 | -£81,662 | -4.21% |
-| B: Radio x2 / Digital -50% | £1,544,882 | -£396,165 | -20.41% |
-| C: Remove TV / Digital +20% | £805,472 | -£1,135,575 | -58.50% |
+| Baseline | 1.94M | £0 | 0.00% |
+| Digital +20% / TV -20% | 1.86M | -£81,662 | -4.21% |
+| Radio x2 / Digital -50% | 1.54M | -£396,165 | -20.41% |
+| Remove TV / Digital +20% | 0.81M | -£1,135,575 | -58.50% |
 
-### Key Findings
+### Final Polish Applied Across All Pages
 
-- No reallocation scenario improves on baseline sales
-- Scenario C is catastrophic (-58.5%) confirming TV is the primary sales driver
-- Scenario B confirms radio's weak coefficient (0.072) - doubling it cannot offset halving digital
-- Scenario A is the least damaging reallocation but still loses £81K
-- Business insight: the current channel mix is near-optimal - incremental total budget increase is a stronger lever than reallocation
+| Page | Fix Applied |
+|------|------------|
+| Page 1 | KPI cards equalised, months sorted Jan-Dec, legend labels cleaned |
+| Page 2 | Duplicate chart title removed, X-axis label added, data labels on bars |
+| Page 3 | Legend title capitalised, table values formatted with £, Weight shows % |
+| Page 4 | vs Baseline formatted with £ and commas, Impact % corrected to 2dp, conditional highlighting working, Summary card tightened |
 
-**Status:** Complete. CSV exported and committed to GitHub.
-Pending: Load scenario_comparison.csv into Power BI (to be done Day 69 morning).
+### Key Business Findings (Full Dashboard)
 
-**Next:** Day 69 - Complete Power BI dashboard Pages 2, 3, 4 and full pipeline test.
+- TV is the only profitable channel at +5.59% ROI
+- Removing TV entirely would destroy 58.50% of predicted sales
+- Current channel mix is near-optimal - incremental budget increase beats reallocation
+- Every £50,000 invested fully in TV returns £52,795 in expected sales
+
+**Status:** All 4 pages complete, polished, and exported as portfolio PNG screenshots. PBIX file saved as Project3_MMM_Dashboard_Final.pbix.
+
+**Next:** Day 70 - LinkedIn post and portfolio write-up for Project 3.
