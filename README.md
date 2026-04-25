@@ -18,7 +18,7 @@ be allocated for the strongest return?
 
 ## Project Status
 
-Day 70 complete in a 120-day analytics programme.
+Day 69 complete in a 120-day analytics programme.
 
 ## Progress Log
 
@@ -73,11 +73,16 @@ Day 70 complete in a 120-day analytics programme.
 - Digital and Radio receive £0 allocation until spend efficiency improves
 - Saved allocation table to `outputs/budget_allocation.csv` and chart to `outputs/budget_allocation.png`
 
-### Day 67 - Power BI MMM Results Dashboard (In Progress)
+### Day 67 - Power BI Dashboard: Executive Overview + Channel ROI + Budget Allocation
 
-- Dashboard build started - KPI page complete with Total Sales, Total Spend, ROAS, Promo Weeks
-- Weekly Sales Trend line chart and Spend by Channel bar chart live on Page 1
-- Pages 2, 3, and 4 in progress - continuing Day 69
+- Built 3 dashboard pages in Power BI Desktop (Windows 365 via RDP on Mac)
+- Page 1 Executive Overview: 4 KPI cards (Total Revenue £1.94M, Total Spend £2.7M, ROAS 0.73, Weeks on Promotion 23), weekly revenue trend line chart, monthly spend by channel bar chart
+- Page 2 Channel Return on Investment Comparison: horizontal bar chart with data labels, Readout narrative card showing TV +5.59%, Digital -2.20%, Radio -87.97%
+- Page 3 Optimised Budget Allocation: donut chart TV 100%, spend matrix table with £50,000 pool, interpretation box
+- All DAX measures created and verified
+- KPI cards equalised to Height 223, Width 277
+- Monthly bar chart sorted Jan to Dec using Month No sort column
+- Legend labels cleaned from raw column names to TV Spend, Radio Spend, Digital Spend
 
 ### Day 68 - Scenario Analysis
 
@@ -89,18 +94,14 @@ Day 70 complete in a 120-day analytics programme.
 - Key insight: no reallocation improves baseline - current mix is near-optimal
 - Saved results to `outputs/scenario_comparison.csv`
 
-### Day 69 - Power BI Dashboard Continued (In Progress)
+### Day 69 - Power BI Dashboard: Scenario Analysis + Final Polish
 
-- Channel ROI Bar Chart page in progress using real model outputs from roi_by_channel_powerbi.csv
-- Budget Allocation and Scenario pages to follow
-- HTML interactive dashboard built as parallel portfolio deliverable
-
-### Day 70 - Presentation Preparation
-
-- Written verbal walkthrough of the full MMM project in `presentation_notes.md`
-- Framed as a business story: problem, method, findings, and recommendation
-- Prepared interview answers covering model validation, OLS limitations, and improvement paths
-- Key framing: lead with incremental revenue outcomes, not model metrics
+- Built Page 4 Scenario Analysis Matrix with conditional highlighting
+- vs Baseline column formatted with £ and comma separators
+- Impact % corrected and displayed to 2 decimal places
+- Full dashboard polish applied across all 4 pages
+- Exported all 4 pages as portfolio PNG screenshots
+- Saved final file as `powerbi/Project3_MMM_Dashboard_Final.pbix`
 
 ## Key Findings
 
@@ -156,6 +157,15 @@ Eliminate radio spend entirely.
 The current channel mix is near-optimal. Increasing total budget is a stronger
 lever than reallocating between channels.
 
+### Power BI Dashboard (Days 67 and 69)
+
+| Page | Title | Key Visual |
+|------|-------|------------|
+| 1 | Executive Overview | KPI cards, weekly trend, monthly spend |
+| 2 | Channel Return on Investment Comparison | ROI bar chart with Readout card |
+| 3 | Optimised Budget Allocation | Donut chart, spend matrix table |
+| 4 | Scenario Analysis Matrix | Conditional highlighted table, Summary card |
+
 ## Outputs
 
 | File | Description |
@@ -173,6 +183,11 @@ lever than reallocating between channels.
 | `outputs/budget_allocation.csv` | Recommended budget allocation table |
 | `outputs/budget_allocation.png` | Budget allocation and expected sales chart |
 | `outputs/scenario_comparison.csv` | 3 scenario budget reallocation results vs baseline |
+| `powerbi/day67_executive_overview.png` | Page 1 dashboard screenshot |
+| `powerbi/day67_channel_roi_comparison.png` | Page 2 dashboard screenshot |
+| `powerbi/day67_optimised_budget_allocation.png` | Page 3 dashboard screenshot |
+| `powerbi/day69_scenario_analysis_matrix.png` | Page 4 dashboard screenshot |
+| `powerbi/Project3_MMM_Dashboard_Final.pbix` | Final Power BI file |
 | `presentation_notes.md` | Business story walkthrough and interview Q&A |
 
 ## Structure
@@ -181,6 +196,7 @@ lever than reallocating between channels.
     ├── data/               # Source dataset, generator script, adstocked dataset
     ├── scripts/            # Inspection, EDA, adstock, regression, ROI, optimiser, scenario scripts
     ├── outputs/            # Charts and model outputs
-    ├── powerbi/            # Dashboard files
+    ├── powerbi/            # Dashboard screenshots and final PBIX file
     ├── README.md
+    ├── project_notes.md
     └── presentation_notes.md
