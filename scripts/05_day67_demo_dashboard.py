@@ -1,5 +1,9 @@
+import os
 from pathlib import Path
+import tempfile
 
+os.environ.setdefault("MPLBACKEND", "Agg")
+os.environ.setdefault("MPLCONFIGDIR", str(Path(tempfile.gettempdir()) / "roi-optimizer-demo-mpl"))
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
@@ -7,7 +11,7 @@ from matplotlib.ticker import FuncFormatter
 import pandas as pd
 
 
-BASE = Path("/Users/saman/projects/roi_optimizer")
+BASE = Path(__file__).resolve().parents[1]
 DATA = BASE / "data" / "powerbi"
 OUT = BASE / "outputs" / "day67_powerbi_demo_dashboard.png"
 

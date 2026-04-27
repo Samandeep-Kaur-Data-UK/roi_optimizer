@@ -11,7 +11,7 @@ Date.
 
 Use the Power BI-safe files in:
 
-`/Users/saman/projects/roi_optimizer/data/powerbi`
+`data/powerbi`
 
 Files:
 
