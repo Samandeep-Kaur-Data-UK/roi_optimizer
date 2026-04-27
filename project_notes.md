@@ -32,7 +32,7 @@ with promo highlights.
 `outputs/scatter_digital_spend_vs_sales.png`,
 `outputs/scatter_radio_spend_vs_sales.png`,
 `outputs/timeseries_sales_promo.png`,
-`data/correlation_matrix.csv`
+`outputs/correlation_matrix.csv`
 
 | Channel | Correlation with Sales | Verdict |
 |---------|------------------------|---------|
@@ -107,7 +107,7 @@ Adj R-squared: 0.703
 ## Day 65 - ROI Calculation per Channel
 
 **Script:** `scripts/03_roi_calculator.py`
-**Outputs:** `data/roi_by_channel.csv`, `outputs/roi_by_channel.png`
+**Outputs:** `outputs/roi_by_channel.csv`, `outputs/roi_by_channel.png`
 
 | Channel | Coefficient | Avg Weekly Spend | Avg Adstock | Return per £1 | ROI |
 |---------|-------------|-----------------|-------------|---------------|-----|
@@ -257,6 +257,11 @@ value at current spend efficiency levels.
 | Page 2 | Duplicate chart title removed, X-axis label added, data labels on bars |
 | Page 3 | Legend title capitalised, table values formatted with £, Weight shows % |
 | Page 4 | vs Baseline formatted with £ and commas, Impact % corrected to 2dp, conditional highlighting working, Summary card tightened |
+
+### Repo Delivery Alignment
+
+- Added `run_mmm.sh` so the full MMM workflow can be rerun from one command.
+- Added `requirements.txt` so the repo is reproducible when reviewed outside the original environment.
 
 ### Key Business Findings (Full Dashboard)
 
