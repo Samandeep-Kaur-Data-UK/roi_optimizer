@@ -1,8 +1,8 @@
-import pandas as pd
-import numpy as np
-import statsmodels.api as sm
+import re
 from pathlib import Path
 
+import pandas as pd
+import statsmodels.api as sm
 # --- Paths ---
 DATA_DIR = Path("data")
 OUTPUT_DIR = Path("outputs")
@@ -29,8 +29,11 @@ print("="*60)
 
 # --- Save summary to file ---
 summary_path = OUTPUT_DIR / "mmm_model_summary.txt"
+summary_text = str(model.summary())
+summary_text = re.sub(r"Date:\s+\S{3},\s+\d{2}\s+\S{3}\s+\d{4}", "Date:                Reproducible", summary_text)
+summary_text = re.sub(r"Time:\s+\d{2}:\d{2}:\d{2}", "Time:                        Omitted", summary_text)
 with open(summary_path, "w") as f:
-    f.write(str(model.summary()))
+    f.write(summary_text)
     f.write("\n\n--- Coefficients ---\n")
     f.write(str(model.params.to_string()))
     f.write("\n\n--- P-Values ---\n")
